@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander'),
+    version = require('./version'),
+    commands = require('./commands');
+
+program
+  .version(version)
+  .option('-j, --json', 'JSON output. Useful to automate/integrate CLI workflow.')
+  .option('-v, --verbose', 'Verbose output.')
+  .option('-c, --config <filename>', 'Force config to given .hook-config file.');
+
+// register available commands
+for (var i=0; i<commands.length; i++) {
+  program
+    .command(commands[i].command)
+    .description( commands[i].description )
+    .action( commands[i].action );
+}
+
+// overwrite default commander output for color support
+require('./ext/commander')(program);
+
+// make program global
+GLOBAL.program = program;
+
+// execute
+program.parse(process.argv);

@@ -1,0 +1,36 @@
+{
+  "name": "hook-cli",
+  "version": "0.3.0",
+  "description": "interactive console for hook",
+  "main": "src/index.js",
+  "bin": "src/hook",
+  "dependencies": {
+    "commander": "~2.3.0",
+    "restler": "~3.2.2",
+    "colors": "~0.6.2",
+    "js2php": "~0.0.7",
+    "cli-table": "~0.3.0",
+    "jquery": "~2.1.0",
+    "xmlhttprequest": "~1.6.0",
+    "form-data": "~0.1.2",
+    "jsdom": "~0.10.1",
+    "ws": "~0.4.31"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:doubleleft/hook-cli.git"
+  },
+  "keywords": [
+    "hook",
+    "cli"
+  ],
+  "author": "Endel Dreyer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/doubleleft/hook-cli/issues"
+  }
+}
