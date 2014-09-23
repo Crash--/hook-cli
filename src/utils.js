@@ -1,12 +1,31 @@
 var fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    yaml = require('js-yaml'),
+    yaml_schema = require('./ext/yaml')(yaml); // register custom yaml types
 
 module.exports = {
   DIRECTORY_NAME: 'hook-ext',
   CONFIG_FILE: '.hook-config',
 
-  getConfigPath: function() {
+  getConfigPath: function(concat) {
     return this.root() + "/" + this.CONFIG_FILE;
+  },
+
+  getExtFile: function(filename) {
+    var data,
+        local_filename = this.root(this.DIRECTORY_NAME) + "/" + filename;
+    if (fs.existsSync(local_filename)) {
+      data = fs.readFileSync(local_filename);
+
+      // parse YAML file using custom schema
+      if (path.extname(local_filename) === '.yaml') {
+        data = yaml.load(data, {schema: yaml_schema});
+      }
+
+      return data;
+    } else {
+      return false;
+    }
   },
 
   config: function() {

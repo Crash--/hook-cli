@@ -2,7 +2,7 @@ var rest = require('restler'),
     utils = require('./utils');
 
 module.exports = {
-  endpoint: 'http://hook.dev/index.php/',
+  endpoint: 'http://hook-master.dev/index.php/',
   debug: false,
 
   setEndpoint: function(endpoint) {
@@ -49,8 +49,9 @@ module.exports = {
   parse: function(request, callback) {
     return request.on('complete', function(data) {
       if (data instanceof Error || data.error) {
+        try { data = JSON.parse(data); } catch (e) {}
         console.error();
-        console.error(data.message || data.error);
+        console.error(data.error || data.message);
         console.error();
         process.exit(1);
       } else {
