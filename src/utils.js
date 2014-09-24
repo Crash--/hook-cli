@@ -11,9 +11,13 @@ module.exports = {
     return this.root() + "/" + this.CONFIG_FILE;
   },
 
+  getExtDir: function() {
+    return this.root(this.DIRECTORY_NAME);
+  },
+
   getExtFile: function(filename) {
     var data,
-        local_filename = this.root(this.DIRECTORY_NAME) + "/" + filename;
+        local_filename = this.getExtDir() + "/" + filename;
     if (fs.existsSync(local_filename)) {
       data = fs.readFileSync(local_filename);
 
@@ -59,6 +63,22 @@ module.exports = {
     }
 
     return process.cwd() + '/' + concat;
+  },
+
+  arraySet: function(arr, key, value) {
+    var keys = key.split("."),
+        last = arr;
+
+    for (var i=0; i<keys.length; i++) {
+      if (!last[ keys[i] ]) {
+        last[ keys[i] ] = {};
+      }
+
+      console.log(keys[i]);
+      // current = current[  ] || {}
+    }
+
+    current = value;
   }
 
 }
